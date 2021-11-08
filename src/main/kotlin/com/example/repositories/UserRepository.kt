@@ -21,7 +21,7 @@ interface UserRepository {
     fun removeUser(userId: String): User?;
 }
 
-class MariaDBUserRepository: UserRepository {
+class MariaDBUserRepository : UserRepository {
     override fun getUsers(): List<User> {
         return transaction {
             MariaDbTransactions.Users.selectAll().map {
@@ -31,60 +31,63 @@ class MariaDBUserRepository: UserRepository {
     }
 
     override fun getUserById(userId: String): User? {
-        return MariaDbTransactions.Users.toUser(
-            transaction {
-                MariaDbTransactions.Users.select {
-                    MariaDbTransactions.Users.id eq Integer.parseInt(userId)
-                }
-            }.single()
-        )
+        return transaction {
+            MariaDbTransactions.Users.select { MariaDbTransactions.Users.id eq Integer.parseInt(userId) }
+                .map { MariaDbTransactions.Users.toUser(it) }
+        }.firstOrNull()
     }
 
     override fun getUserByEmail(userEmail: String): User? {
-        return MariaDbTransactions.Users.toUser(
-            transaction {
-                MariaDbTransactions.Users.select {
-                    MariaDbTransactions.Users.email eq userEmail
-                }
-            }.single()
-        )
+        return transaction {
+            MariaDbTransactions.Users.select {
+                MariaDbTransactions.Users.email eq userEmail
+            }.map { MariaDbTransactions.Users.toUser(it) }
+        }.firstOrNull()
     }
 
     override fun createUser(user: User): User? {
-        MariaDbTransactions.Users.insert {
-            it[MariaDbTransactions.Users.email] = user.email
-            it[MariaDbTransactions.Users.password] = user.password
-            it[MariaDbTransactions.Users.fullName] = user.fullName
-            it[MariaDbTransactions.Users.callingName] = user.callingName
+        transaction {
+            MariaDbTransactions.Users.insert {
+                it[MariaDbTransactions.Users.email] = user.email
+                it[MariaDbTransactions.Users.password] = user.password
+                it[MariaDbTransactions.Users.fullName] = user.fullName
+                it[MariaDbTransactions.Users.callingName] = user.callingName
+            }
         }
         return user;
     }
 
     override fun modifyUser(userId: String, user: User): User? {
-        MariaDbTransactions.Users.update({
-            MariaDbTransactions.Users.id eq Integer.parseInt(userId)
-        }) {
-            it[MariaDbTransactions.Users.email] = user.email
-            it[MariaDbTransactions.Users.password] = user.password
-            it[MariaDbTransactions.Users.fullName] = user.fullName
-            it[MariaDbTransactions.Users.callingName] = user.callingName
+        transaction {
+            MariaDbTransactions.Users.update({
+                MariaDbTransactions.Users.id eq Integer.parseInt(userId)
+            }) {
+                it[MariaDbTransactions.Users.email] = user.email
+                it[MariaDbTransactions.Users.password] = user.password
+                it[MariaDbTransactions.Users.fullName] = user.fullName
+                it[MariaDbTransactions.Users.callingName] = user.callingName
+            }
         }
         return user
     }
 
     override fun modifyPassword(userEmail: String, newPassword: String): User? {
-        MariaDbTransactions.Users.update({
-            MariaDbTransactions.Users.email eq userEmail
-        }) {
-            it[MariaDbTransactions.Users.password] = newPassword
+        transaction {
+            MariaDbTransactions.Users.update({
+                MariaDbTransactions.Users.email eq userEmail
+            }) {
+                it[MariaDbTransactions.Users.password] = newPassword
+            }
         }
         return getUserByEmail(userEmail)
     }
 
     override fun removeUser(userId: String): User? {
         val userToBeDeleted = getUserById(userId)
-        MariaDbTransactions.Users.deleteWhere {
-            MariaDbTransactions.Users.id eq Integer.parseInt(userId)
+        transaction {
+            MariaDbTransactions.Users.deleteWhere {
+                MariaDbTransactions.Users.id eq Integer.parseInt(userId)
+            }
         }
         return userToBeDeleted
     }

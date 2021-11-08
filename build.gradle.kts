@@ -42,6 +42,7 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed:$exposed_version")
     implementation("mysql:mysql-connector-java:5.1.48")
     implementation("com.zaxxer:HikariCP:3.4.2")
+    implementation("io.insert-koin:koin-ktor:3.1.3")
     testImplementation("io.ktor:ktor-server-tests:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlin_version")
 }
