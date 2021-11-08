@@ -1,5 +1,6 @@
 package com.example
 
+import com.example.config.DBConfig
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import com.example.plugins.*
@@ -10,5 +11,6 @@ fun main() {
         configureSerialization()
         configureMonitoring()
         configureHTTP()
+        DBConfig()
     }.start(wait = true)
 }
