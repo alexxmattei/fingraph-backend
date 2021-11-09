@@ -1,4 +1,4 @@
-package com.example.error
+package com.example.coingeckoapi.error
 
 data class CoinGeckoApiError(
     val code: Int = 0,

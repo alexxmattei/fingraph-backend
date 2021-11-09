@@ -1,4 +1,4 @@
-package com.example.constants
+package com.example.coingeckoapi.constants
 
 object Order {
     const val GECKO_ASC = "gecko_asc"
