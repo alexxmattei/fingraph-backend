@@ -6,4 +6,8 @@ val controllerModule = module {
     single {
         UserController(get())
     }
+
+    single {
+        TestController()
+    }
 }

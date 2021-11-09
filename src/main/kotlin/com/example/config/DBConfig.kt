@@ -1,10 +1,8 @@
 package com.example.config
 
-import com.example.transactions.MariaDbTransactions
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import org.jetbrains.exposed.sql.*
-import org.jetbrains.exposed.sql.transactions.*
 
 class DBConfig() {
     private val config: HikariConfig = HikariConfig().apply {
@@ -19,6 +17,5 @@ class DBConfig() {
     init {
         Database.connect(dataSource)
     }
-
 
 }
