@@ -44,9 +44,12 @@ dependencies {
     implementation("com.zaxxer:HikariCP:3.4.2")
     implementation("io.insert-koin:koin-ktor:3.1.3")
     implementation("io.ktor:ktor-client-core:$ktor_version")
+    implementation("io.ktor:ktor-client-serialization:$ktor_version")
     implementation("io.ktor:ktor-client-cio:$ktor_version")
     implementation("io.ktor:ktor-client-logging:$ktor_version")
     implementation("io.ktor:ktor-client-apache:$ktor_version")
+    implementation("io.ktor:ktor-client-gson:$ktor_version")
+    implementation("io.ktor:ktor-client-jackson:$ktor_version")
     testImplementation("io.ktor:ktor-server-tests:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlin_version")
 }

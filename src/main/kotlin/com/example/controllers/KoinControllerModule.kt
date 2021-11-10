@@ -10,4 +10,8 @@ val controllerModule = module {
     single {
         TestController()
     }
+
+    single {
+        CoinGeckoController()
+    }
 }

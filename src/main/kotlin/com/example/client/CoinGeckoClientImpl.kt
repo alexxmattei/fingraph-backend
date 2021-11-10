@@ -17,6 +17,8 @@ import com.example.models.coingecko.search.TrendingCoinList
 import com.example.models.coingecko.status.StatusUpdates
 import io.ktor.client.*
 import io.ktor.client.features.*
+import io.ktor.client.features.json.JsonFeature
+import io.ktor.client.features.json.serializer.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import kotlinx.serialization.json.*
@@ -58,14 +60,7 @@ private const val API_BASE_PATH = "/api/v3"
 
 typealias RawPriceMap = Map<String, Map<String, String?>>
 
-internal val json = Json {
-    isLenient = true
-    ignoreUnknownKeys = true
-    coerceInputValues = true
-    useAlternativeNames = false
-}
-
-internal class CoinGeckoClientImpl(httpClient: HttpClient) : CoinGeckoClient {
+public class CoinGeckoClientImpl(httpClient: HttpClient) : CoinGeckoClient {
 
     constructor() : this(HttpClient())
 
@@ -77,6 +72,16 @@ internal class CoinGeckoClientImpl(httpClient: HttpClient) : CoinGeckoClient {
         }
         install(ErrorTransformer)
         install(PagingTransformer)
+
+        install(JsonFeature) {
+            serializer = KotlinxSerializer(Json {
+                prettyPrint = true
+                isLenient = true
+                ignoreUnknownKeys = true
+                coerceInputValues = true
+                useAlternativeNames = false
+            })
+        }
     }
 
     override suspend fun ping(): Ping = httpClient.get("ping")
