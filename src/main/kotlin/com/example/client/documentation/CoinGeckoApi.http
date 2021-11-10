@@ -1,0 +1,49 @@
+# Get the current price of any cryptocurrencies in any other supported currencies that you need.
+GET https://api.coingecko.com/api/v3/simple/price/id?vs_currencies=usdt
+Content-Type: application/json
+###
+
+# Get current price of tokens (using contract addresses) for a given platform in any other currency that you need.
+GET https://api.coingecko.com/api/v3//simple/token_price/{id}
+Content-Type: application/json
+###
+
+# Get list of supported_vs_currencies.
+GET https://api.coingecko.com/api/v3/coins/list/simple/supported_vs_currencies
+Content-Type: application/json
+###
+
+# List all supported coins id, name and symbol (no pagination required)
+GET https://api.coingecko.com/api/v3/coins/list
+Content-Type: application/json
+###
+
+# List all supported coins price, market cap, volume, and market related data
+GET https://api.coingecko.com/api/v3/coins/markets
+Content-Type: application/json
+###
+
+# Get current data (name, price, market, ... including exchange tickers) for a coin
+GET https://api.coingecko.com/api/v3/coins/{id}
+Content-Type: application/json
+###
+
+# Get coin tickers (paginated to 100 items)
+GET https://api.coingecko.com/api/v3/coins/{id}/tickers
+Content-Type: application/json
+###
+
+# Get historical data (name, price, market, stats) at a given date for a coin
+GET https://api.coingecko.com/api/v3/coins/{id}/history
+Content-Type: application/json
+###
+
+# Get historical market data include price, market cap, and 24h volume (granularity auto)
+GET https://api.coingecko.com/api/v3/coins/{id}/maket_chart
+Content-Type: application/json
+###
+
+# Get historical market data include price, market cap, and 24h volume within a range of timestamp (granularity auto)
+GET https://api.coingecko.com/api/v3/coins/{id}/market_chart/range
+Content-Type: application/json
+###

@@ -1,0 +1,28 @@
+
+# Pings CoinGecko's Servers to get a current uptime status
+
+GET http://localhost:8080/api/v1/coingecko/ping
+Content-Type: application/json
+
+###
+
+# get price per coin relative to default currency
+GET http://localhost:8080/api/v1/coingecko/price/coinId
+Content-Type: application/json
+
+{
+  "coinId": "{coinId}"
+}
+
+###
+
+# get price per coin relative to user's default currency
+GET http://localhost:8080/api/v1/coingecko/price/coinId/fiatId
+Content-Type: application/json
+
+{
+  "coinId": "{coinId}",
+  "fiatId": "{fiatId}"
+}
+
+###
