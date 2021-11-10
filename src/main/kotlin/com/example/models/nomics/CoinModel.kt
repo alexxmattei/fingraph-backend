@@ -1,7 +1,6 @@
 package com.example.models.nomics
 
 import kotlinx.serialization.Serializable
-import java.math.BigInteger
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -29,5 +28,5 @@ data class Coin(
     var rank: String = "",
     var high: Double = 0.0,
     var highTimestamp: String = LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME),
-    var oneHour: Candle = Candle()
+    var oneHour: CandleData = CandleData()
     )

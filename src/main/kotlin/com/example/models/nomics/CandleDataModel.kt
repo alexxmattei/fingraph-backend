@@ -3,7 +3,7 @@ package com.example.models.nomics
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Candle(
+data class CandleData(
     var volume: String = "",
     var priceChange: Double = 0.0,
     var priceChangePct: Double = 0.0,
