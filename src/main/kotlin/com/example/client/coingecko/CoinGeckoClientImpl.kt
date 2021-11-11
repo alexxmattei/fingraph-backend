@@ -1,5 +1,6 @@
-package com.example.client
+package com.example.client.coingecko
 
+import com.example.client.coingecko.CoinGeckoClient
 import com.example.coingeckoapi.internal.ErrorTransformer
 import com.example.coingeckoapi.internal.PagingTransformer
 import com.example.models.coingecko.AssetPlatform
@@ -22,7 +23,6 @@ import io.ktor.client.features.json.serializer.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import kotlinx.serialization.json.*
-import kotlin.native.concurrent.*
 
 private const val IDS = "ids"
 private const val PAGE = "page"
@@ -60,7 +60,7 @@ private const val API_BASE_PATH = "/api/v3"
 
 typealias RawPriceMap = Map<String, Map<String, String?>>
 
-public class CoinGeckoClientImpl(httpClient: HttpClient) : CoinGeckoClient {
+class CoinGeckoClientImpl(httpClient: HttpClient) : CoinGeckoClient {
 
     constructor() : this(HttpClient())
 

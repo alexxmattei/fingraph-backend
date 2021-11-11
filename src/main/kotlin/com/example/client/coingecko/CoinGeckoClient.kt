@@ -1,4 +1,4 @@
-package com.example.client
+package com.example.client.coingecko
 
 import com.example.coingeckoapi.constants.Order
 import com.example.coingeckoapi.error.CoinGeckoApiException

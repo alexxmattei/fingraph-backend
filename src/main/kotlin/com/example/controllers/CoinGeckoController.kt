@@ -1,6 +1,6 @@
 package com.example.controllers
 
-import com.example.client.CoinGeckoClient
+import com.example.client.coingecko.CoinGeckoClient
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.response.*
