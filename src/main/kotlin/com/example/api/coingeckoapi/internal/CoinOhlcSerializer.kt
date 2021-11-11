@@ -1,4 +1,4 @@
-package com.example.coingeckoapi.internal
+package com.example.api.coingeckoapi.internal
 
 import com.example.models.coingecko.coins.CoinOhlc
 import kotlinx.serialization.*

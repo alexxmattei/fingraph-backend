@@ -1,4 +1,4 @@
-package com.example.coingeckoapi.internal
+package com.example.api.coingeckoapi.internal
 
 import io.ktor.client.HttpClient
 import io.ktor.client.features.HttpClientFeature

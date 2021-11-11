@@ -1,6 +1,6 @@
 package com.example.models.coingecko.coins
 
-import com.example.coingeckoapi.internal.CoinOhlcSerializer
+import com.example.api.coingeckoapi.internal.CoinOhlcSerializer
 import kotlinx.serialization.Serializable
 
 @Serializable(with = CoinOhlcSerializer::class)

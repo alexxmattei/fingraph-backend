@@ -1,8 +1,7 @@
 package com.example.client.coingecko
 
-import com.example.client.coingecko.CoinGeckoClient
-import com.example.coingeckoapi.internal.ErrorTransformer
-import com.example.coingeckoapi.internal.PagingTransformer
+import com.example.api.coingeckoapi.internal.ErrorTransformer
+import com.example.api.coingeckoapi.internal.PagingTransformer
 import com.example.models.coingecko.AssetPlatform
 import com.example.models.coingecko.Ping
 import com.example.models.coingecko.coins.*

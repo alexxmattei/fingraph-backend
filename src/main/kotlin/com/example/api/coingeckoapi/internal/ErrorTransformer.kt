@@ -1,7 +1,7 @@
-package com.example.coingeckoapi.internal
+package com.example.api.coingeckoapi.internal
 
-import com.example.coingeckoapi.error.CoinGeckoApiError
-import com.example.coingeckoapi.error.CoinGeckoApiException
+import com.example.api.coingeckoapi.error.CoinGeckoApiError
+import com.example.api.coingeckoapi.error.CoinGeckoApiException
 import io.ktor.client.*
 import io.ktor.client.features.*
 import io.ktor.client.request.*

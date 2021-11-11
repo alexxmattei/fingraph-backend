@@ -1,4 +1,4 @@
-package com.example.coingeckoapi.constants
+package com.example.api.nomicsapi.constants
 
 // https://coinmarketcap.com/all/views/all/
 

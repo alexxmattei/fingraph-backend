@@ -1,4 +1,4 @@
-package com.example.coingeckoapi.constants
+package com.example.api.coingeckoapi.constants
 
 object Currency {
     // fiat currencies

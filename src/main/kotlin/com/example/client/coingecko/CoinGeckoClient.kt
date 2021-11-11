@@ -1,7 +1,7 @@
 package com.example.client.coingecko
 
-import com.example.coingeckoapi.constants.Order
-import com.example.coingeckoapi.error.CoinGeckoApiException
+import com.example.api.coingeckoapi.constants.Order
+import com.example.api.coingeckoapi.error.CoinGeckoApiException
 import com.example.models.coingecko.AssetPlatform
 import com.example.models.coingecko.Ping
 import com.example.models.coingecko.coins.*

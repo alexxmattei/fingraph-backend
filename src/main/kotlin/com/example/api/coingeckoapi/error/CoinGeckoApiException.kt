@@ -1,4 +1,4 @@
-package com.example.coingeckoapi.error
+package com.example.api.coingeckoapi.error
 
 class CoinGeckoApiException : Exception {
     var error: CoinGeckoApiError? = null
