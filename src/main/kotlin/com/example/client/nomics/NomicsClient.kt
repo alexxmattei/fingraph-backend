@@ -5,6 +5,7 @@ import io.ktor.client.*
 import kotlin.coroutines.cancellation.CancellationException
 import kotlin.jvm.Throws
 import com.example.models.nomics.Coin
+import com.example.models.nomics.CoinMetadata
 
 interface NomicsClient {
     companion object {
@@ -18,10 +19,19 @@ interface NomicsClient {
     }
 
     @Throws(NomicsApiException::class, CancellationException::class)
-    suspend fun getCurrenciesById(
+    suspend fun getPing() : String
+
+    @Throws(NomicsApiException::class, CancellationException::class)
+    suspend fun getCurrencyById(
         ids: String,
         interval: String,
         convert: String,
         status: String
     ) : List<Coin>
+
+    @Throws(NomicsApiException::class, CancellationException::class)
+    suspend fun getCurrencyMetadataById(
+        key: String,
+        ids: String
+    ) : List<CoinMetadata>
 }

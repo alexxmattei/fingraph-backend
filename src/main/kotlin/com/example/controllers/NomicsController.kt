@@ -12,20 +12,39 @@ class NomicsController {
 
     fun addRoutes(route: Route) {
         route.route("/nomics") {
-            getCurrenciesById(this)
+            getCurrencyTest(this)
+            getCurrencyById(this)
+            getCurrencyMetadataById(this)
         }
     }
 
-    private fun getCurrenciesById(route: Route) {
+    private fun getCurrencyTest(route: Route) {
+        route.get("/meta") {
+            val pingResponse = nomicsClient.getPing()
+            call.respond(HttpStatusCode.OK, pingResponse)
+        }
+    }
+
+    private fun getCurrencyById(route: Route) {
         route.get("/price/{ids}") {
             call.request.queryParameters["key"] ?: "b41f7cca5feb852dbdaa3f7eca845d9b8c2c7e42"
             val coinId = call.parameters["ids"] ?: ""
             val interval = call.parameters["interval"] ?: ""
             val convert = call.parameters["convert"] ?: ""
             val status = call.parameters["status"] ?: ""
-            val currencyResponse = nomicsClient.getCurrenciesById(coinId, interval, convert, status)
+            val currencyResponse = nomicsClient.getCurrencyById(coinId, interval, convert, status)
 
             call.respond(HttpStatusCode.OK, currencyResponse)
+        }
+    }
+
+    private fun getCurrencyMetadataById(route: Route) {
+        route.get("/meta/{ids}") {
+            val apiKey = "b41f7cca5feb852dbdaa3f7eca845d9b8c2c7e42"
+            val coinId = call.parameters["ids"] ?: "NEXO"
+            val currencyMetadataResponse = nomicsClient.getCurrencyMetadataById(apiKey, coinId)
+
+            call.respond(HttpStatusCode.OK, currencyMetadataResponse)
         }
     }
 }

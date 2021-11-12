@@ -3,6 +3,7 @@ package com.example.client.nomics
 import com.example.api.coingeckoapi.internal.PagingTransformer
 import com.example.api.nomicsapi.internal.NomicsErrorTransformer
 import com.example.models.nomics.Coin
+import com.example.models.nomics.CoinMetadata
 import io.ktor.client.*
 import io.ktor.client.features.*
 import io.ktor.client.features.json.JsonFeature
@@ -43,7 +44,9 @@ class NomicsClientImpl(httpClient: HttpClient) : NomicsClient {
         }
     }
 
-    override suspend fun getCurrenciesById(
+    override suspend fun getPing() = "Nomics API Client is working properly!"
+
+    override suspend fun getCurrencyById(
         ids: String,
         interval: String,
         convert: String,
@@ -53,4 +56,7 @@ class NomicsClientImpl(httpClient: HttpClient) : NomicsClient {
         parameter(CONVERT, convert)
         parameter(STATUS, status)
     }
+
+    override suspend fun getCurrencyMetadataById(key: String, ids: String) : List<CoinMetadata> =
+        httpClient.get("currencies")
 }
