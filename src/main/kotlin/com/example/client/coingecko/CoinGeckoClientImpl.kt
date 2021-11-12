@@ -1,6 +1,6 @@
 package com.example.client.coingecko
 
-import com.example.api.coingeckoapi.internal.ErrorTransformer
+import com.example.api.coingeckoapi.internal.CoinGeckoErrorTransformer
 import com.example.api.coingeckoapi.internal.PagingTransformer
 import com.example.models.coingecko.AssetPlatform
 import com.example.models.coingecko.Ping
@@ -69,7 +69,7 @@ class CoinGeckoClientImpl(httpClient: HttpClient) : CoinGeckoClient {
             url.host = API_HOST
             url.encodedPath = API_BASE_PATH + url.encodedPath
         }
-        install(ErrorTransformer)
+        install(CoinGeckoErrorTransformer)
         install(PagingTransformer)
 
         install(JsonFeature) {

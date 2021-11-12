@@ -7,7 +7,6 @@ import io.ktor.response.*
 import io.ktor.routing.*
 
 
-
 class NomicsController {
     private val nomicsClient = NomicsClient.create()
 
@@ -19,6 +18,7 @@ class NomicsController {
 
     private fun getCurrenciesById(route: Route) {
         route.get("/price/{ids}") {
+            call.request.queryParameters["key"] ?: "b41f7cca5feb852dbdaa3f7eca845d9b8c2c7e42"
             val coinId = call.parameters["ids"] ?: ""
             val interval = call.parameters["interval"] ?: ""
             val convert = call.parameters["convert"] ?: ""

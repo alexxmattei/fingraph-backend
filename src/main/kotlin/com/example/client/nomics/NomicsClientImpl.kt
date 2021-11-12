@@ -1,7 +1,7 @@
 package com.example.client.nomics
 
-import com.example.api.coingeckoapi.internal.ErrorTransformer
 import com.example.api.coingeckoapi.internal.PagingTransformer
+import com.example.api.nomicsapi.internal.NomicsErrorTransformer
 import com.example.models.nomics.Coin
 import io.ktor.client.*
 import io.ktor.client.features.*
@@ -29,7 +29,7 @@ class NomicsClientImpl(httpClient: HttpClient) : NomicsClient {
             url.host = API_HOST
             url.encodedPath = API_BASE_PATH + url.encodedPath
         }
-        install(ErrorTransformer)
+        install(NomicsErrorTransformer)
         install(PagingTransformer)
 
         install(JsonFeature) {
@@ -41,8 +41,6 @@ class NomicsClientImpl(httpClient: HttpClient) : NomicsClient {
                 useAlternativeNames = false
             })
         }
-
-
     }
 
     override suspend fun getCurrenciesById(
@@ -51,10 +49,6 @@ class NomicsClientImpl(httpClient: HttpClient) : NomicsClient {
         convert: String,
         status: String
     ): List<Coin> = httpClient.get("currencies/ticker/$ids") {
-        headers {
-            append("Authorization", KEY)
-            append("Accept", "application/json")
-        }
         parameter(INTERVAL, interval)
         parameter(CONVERT, convert)
         parameter(STATUS, status)
