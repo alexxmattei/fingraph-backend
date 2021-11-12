@@ -11,6 +11,7 @@ fun Application.configureRouting() {
     val userController = getKoin().get<UserController>()
     val testController = getKoin().get<TestController>()
     val coinGeckoController = getKoin().get<CoinGeckoController>()
+    val nomicsController = getKoin().get<NomicsController>()
 
     routing {
         route("/api") {
@@ -18,6 +19,7 @@ fun Application.configureRouting() {
                  userController.addRoutes(this)
                  testController.addRoutes(this)
                  coinGeckoController.addRoutes(this)
+                 nomicsController.addRoutes(this)
             }
         }
     }

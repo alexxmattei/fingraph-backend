@@ -14,4 +14,8 @@ val controllerModule = module {
     single {
         CoinGeckoController()
     }
+
+    single {
+        NomicsController()
+    }
 }
