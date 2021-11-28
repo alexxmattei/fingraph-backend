@@ -53,6 +53,5 @@ class FingraphUserService(private val userRepository: UserRepository) : UserServ
     override fun removeUser(userId: String): User =
         userRepository.removeUser(userId) ?: throw InternalError("Could not remove user with the id '$userId'!")
 
-
 }
 

@@ -35,6 +35,7 @@ dependencies {
     implementation("io.ktor:ktor-client-apache:$ktor_version")
     implementation("io.ktor:ktor-auth-jwt:$ktor_version")
     implementation("io.ktor:ktor-server-netty:$ktor_version")
+    implementation("io.ktor:ktor-serialization:$ktor_version")
     implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation("org.mariadb.jdbc:mariadb-java-client:$mariadb_version")
     implementation("org.jetbrains.kotlin:kotlin-serialization:$kotlin_serialization_version")
