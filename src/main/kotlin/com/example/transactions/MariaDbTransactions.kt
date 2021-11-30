@@ -1,5 +1,6 @@
 package com.example.transactions
 
+import com.example.models.PasswordRecoveryEntry
 import com.example.models.User
 import com.example.models.nomics.CandleData
 import com.example.models.nomics.Coin
@@ -20,6 +21,18 @@ class MariaDbTransactions {
             password = row[Users.password],
             fullName = row[Users.fullName],
             callingName = row[Users.callingName]
+        )
+    }
+
+    object RecoveryEntries : Table() {
+        val id: Column<String> = varchar("id", 255)
+        val email: Column<String> = varchar("email", 255)
+        val expirationDate: Column<String> = varchar("expirationDate", 255)
+
+        fun toRecoveries(row: ResultRow): PasswordRecoveryEntry = PasswordRecoveryEntry(
+            id = row[RecoveryEntries.id],
+            email = row[RecoveryEntries.email],
+            expirationDate = row[RecoveryEntries.expirationDate]
         )
     }
 

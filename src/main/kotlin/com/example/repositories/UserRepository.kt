@@ -54,7 +54,7 @@ class MariaDBUserRepository : UserRepository {
                 it[MariaDbTransactions.Users.callingName] = user.callingName
             }
         }
-        return user;
+        return user
     }
 
     override fun modifyUser(userId: String, user: User): User? {
