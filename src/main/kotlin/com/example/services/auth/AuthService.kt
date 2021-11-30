@@ -1,4 +1,5 @@
 package com.example.services.auth
+
 import com.auth0.jwt.JWT
 import com.auth0.jwt.JWTVerifier
 import com.auth0.jwt.interfaces.Payload
@@ -38,7 +39,7 @@ class FingraphAuthService(
     override fun generateToken(user: User): String = JWT.create()
         .withSubject("Authentication")
         .withAudience(JwtConfig.audience)
-        .withIssuer(JwtConfig.algorithm.toString())
+        .withIssuer(JwtConfig.domain)
         .withClaim("email", user.email)
         .withClaim("password", user.password)
         .withExpiresAt(getExpiration())
@@ -49,7 +50,7 @@ class FingraphAuthService(
         val password: String = payload.getClaim("password").asString()
         val user: User = userService.getUserByEmail(email)
 
-        if(password == user.password) {
+        if (password == user.password) {
             return user
         }
         return null
@@ -62,7 +63,7 @@ class FingraphAuthService(
 
         // TODO change condition when encrypting password
         //  Encryption.verifyPassword(password, foundUser.password)
-        if(password == (foundUser.password)) {
+        if (password == (foundUser.password)) {
             jwtToken = generateToken(foundUser)
             return jwtToken
         }
@@ -79,5 +80,4 @@ class FingraphAuthService(
     }
 
     private fun getExpiration() = Date(System.currentTimeMillis() + JwtConfig.validityInMs)
-
 }

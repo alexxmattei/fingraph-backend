@@ -14,7 +14,7 @@ fun Application.configureAuthentication() {
     install(Authentication) {
         jwt {
             verifier(authService.verifier)
-            realm = "com.fingraph"
+            realm = "com.example"
             validate { credentials ->
                 authService.validateUser(credentials.payload)
             }
