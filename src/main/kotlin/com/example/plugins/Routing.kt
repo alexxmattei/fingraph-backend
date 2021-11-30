@@ -18,8 +18,8 @@ fun Application.configureRouting() {
     routing {
         route("/api") {
             route("/v1") {
-                 userController.addRoutes(this)
                  authController.addRoutes(this)
+                 userController.addRoutes(this)
                  testController.addRoutes(this)
                  coinGeckoController.addRoutes(this)
                  nomicsController.addRoutes(this)

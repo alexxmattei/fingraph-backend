@@ -1,16 +1,16 @@
 package com.example.services.auth
-
 import com.auth0.jwt.JWT
 import com.auth0.jwt.JWTVerifier
 import com.auth0.jwt.interfaces.Payload
 import com.example.config.JwtConfig
 import com.example.models.User
 import com.example.models.UserLogin
+import com.example.plugins.AuthenticationException
 import com.example.services.UserService
 import com.example.util.Encryption
 import java.lang.Exception
 import java.util.*
-import javax.naming.AuthenticationException
+
 
 interface AuthService {
     val verifier: JWTVerifier
@@ -60,11 +60,13 @@ class FingraphAuthService(
         val foundUser: User = userService.getUserByEmail(email)
         val jwtToken: String
 
-        if(Encryption.verifyEncryptedPassword(password, foundUser.password)) {
+        // TODO change condition when encrypting password
+        //  Encryption.verifyPassword(password, foundUser.password)
+        if(password == (foundUser.password)) {
             jwtToken = generateToken(foundUser)
             return jwtToken
         }
-        throw  AuthenticationException("Invalid password!")
+        throw AuthenticationException("Invalid password!")
     }
 
     override fun verifyToken(token: String): Boolean {

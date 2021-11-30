@@ -5,11 +5,11 @@ import org.koin.dsl.module
 
 val controllerModule = module {
     single {
-        UserController(get())
+        AuthController(get(), get())
     }
 
     single {
-        AuthController(get(), get())
+        UserController(get())
     }
 
     single {

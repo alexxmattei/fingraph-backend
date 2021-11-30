@@ -12,4 +12,5 @@ data class User(
     var callingName: String = ""
 ) : Principal
 
+@Serializable
 data class UserLogin(val email: String, val password: String)
