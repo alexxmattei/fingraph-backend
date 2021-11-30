@@ -37,9 +37,13 @@ class AuthController(
     private fun registerRoute(route: Route) {
         route.post("/register") {
             val user: User = call.receive()
-            val createdUser: User = userService.createUser(user)
-
-            call.respond(HttpStatusCode.OK, createdUser)
+            val createdUser: User
+            if(userService.checkIfUserExists(user.email).valid) {
+                createdUser = userService.createUser(user)
+                call.respond(HttpStatusCode.OK, createdUser)
+            } else {
+                call.respond(HttpStatusCode.BadRequest, "An account with the given email address already exists!")
+            }
         }
     }
 

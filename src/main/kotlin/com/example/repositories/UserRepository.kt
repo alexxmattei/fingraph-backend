@@ -1,24 +1,27 @@
 package com.example.repositories
 
 import com.example.models.User
+import com.example.models.dto.Valid
 import com.example.transactions.MariaDbTransactions
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 
 interface UserRepository {
-    fun getUsers(): List<User>;
+    fun getUsers(): List<User>
 
-    fun getUserById(userId: String): User?;
+    fun getUserById(userId: String): User?
 
-    fun getUserByEmail(userEmail: String): User?;
+    fun getUserByEmail(userEmail: String): User?
 
-    fun createUser(user: User): User?;
+    fun createUser(user: User): User?
 
-    fun modifyUser(userId: String, user: User): User?;
+    fun modifyUser(userId: String, user: User): User?
 
-    fun modifyPassword(userEmail: String, newPassword: String): User?;
+    fun modifyPassword(userEmail: String, newPassword: String): User?
 
-    fun removeUser(userId: String): User?;
+    fun removeUser(userId: String): User?
+
+    fun checkExistingUser(userEmail: String): Boolean
 }
 
 class MariaDBUserRepository : UserRepository {
@@ -90,5 +93,9 @@ class MariaDBUserRepository : UserRepository {
             }
         }
         return userToBeDeleted
+    }
+
+    override fun checkExistingUser(userEmail: String): Boolean {
+        return getUserByEmail(userEmail) == null
     }
 }

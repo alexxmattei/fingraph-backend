@@ -1,6 +1,7 @@
 package com.example.services
 
 import com.example.models.User
+import com.example.models.dto.Valid
 import com.example.repositories.UserRepository
 import io.ktor.features.*
 import kotlin.reflect.jvm.internal.impl.descriptors.NotFoundClasses
@@ -19,6 +20,8 @@ interface UserService {
     fun modifyPassword(userEmail: String, newPassword: String): User
 
     fun removeUser(userId: String): User
+
+    fun checkIfUserExists(userEmail: String): Valid
 }
 
 class FingraphUserService(private val userRepository: UserRepository) : UserService {
@@ -53,5 +56,12 @@ class FingraphUserService(private val userRepository: UserRepository) : UserServ
     override fun removeUser(userId: String): User =
         userRepository.removeUser(userId) ?: throw InternalError("Could not remove user with the id '$userId'!")
 
+    override fun checkIfUserExists(userEmail: String): Valid {
+        return if(userRepository.checkExistingUser(userEmail)) {
+            Valid(true)
+        } else {
+            Valid(false)
+        }
+    }
 }
 
