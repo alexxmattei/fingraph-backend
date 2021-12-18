@@ -8,13 +8,14 @@ import com.example.plugins.*
 fun main() {
     embeddedServer(Netty, port = 8080, host = "0.0.0.0") {
         configureHeaders()
+        configureCORS()
         configureKoin()
         configureAuthentication()
         configureStatusPages()
-        configureRouting()
         configureSerialization()
         configureMonitoring()
-        configureHTTP()
+        configureRouting()
+//        configureHTTP()
         DBConfig()
     }.start(wait = true)
 }
