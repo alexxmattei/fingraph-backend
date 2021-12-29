@@ -5,7 +5,9 @@ import io.ktor.client.*
 import kotlin.coroutines.cancellation.CancellationException
 import kotlin.jvm.Throws
 import com.example.models.nomics.Coin
+import com.example.models.nomics.CoinMarketCap
 import com.example.models.nomics.CoinMetadata
+import com.example.models.nomics.MarketGlobalVolumeHistory
 
 interface NomicsClient {
     companion object {
@@ -19,7 +21,7 @@ interface NomicsClient {
     }
 
     @Throws(NomicsApiException::class, CancellationException::class)
-    suspend fun getPing() : String
+    suspend fun getPing(): String
 
     @Throws(NomicsApiException::class, CancellationException::class)
     suspend fun getCurrencyById(
@@ -27,11 +29,24 @@ interface NomicsClient {
         interval: String,
         convert: String,
         status: String
-    ) : List<Coin>
+    ): List<Coin>
 
     @Throws(NomicsApiException::class, CancellationException::class)
     suspend fun getCurrencyMetadataById(
         key: String,
         ids: String
-    ) : List<CoinMetadata>
+    ): List<CoinMetadata>
+
+    @Throws(NomicsApiException::class, CancellationException::class)
+    suspend fun getMarketCapHistoryByIdCurrentDate(
+        ids: String,
+        start: String,
+        end: String?
+    ): List<CoinMarketCap>
+
+    @Throws(NomicsApiException::class, CancellationException::class)
+    suspend fun getGlobalVolumeHistory(
+        start: String,
+        end: String?
+    ): List<MarketGlobalVolumeHistory>
 }

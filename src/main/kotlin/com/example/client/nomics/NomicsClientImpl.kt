@@ -3,7 +3,9 @@ package com.example.client.nomics
 import com.example.api.coingeckoapi.internal.PagingTransformer
 import com.example.api.nomicsapi.internal.NomicsErrorTransformer
 import com.example.models.nomics.Coin
+import com.example.models.nomics.CoinMarketCap
 import com.example.models.nomics.CoinMetadata
+import com.example.models.nomics.MarketGlobalVolumeHistory
 import io.ktor.client.*
 import io.ktor.client.features.*
 import io.ktor.client.features.json.JsonFeature
@@ -15,6 +17,8 @@ private const val IDS = "ids"
 private const val INTERVAL = "interval"
 private const val CONVERT = "convert"
 private const val STATUS = "status"
+private const val START = "start"
+private const val END = "end"
 
 private const val API_HOST = "api.nomics.com"
 private const val API_BASE_PATH = "/v1"
@@ -59,6 +63,21 @@ class NomicsClientImpl(httpClient: HttpClient) : NomicsClient {
         parameter(STATUS, status)
     }
 
-    override suspend fun getCurrencyMetadataById(key: String, ids: String) : List<CoinMetadata> =
-        httpClient.get("currencies")
+    override suspend fun getCurrencyMetadataById(key: String, ids: String): List<CoinMetadata> =
+        httpClient.get("currencies") {
+            parameter(IDS, ids)
+        }
+
+    override suspend fun getMarketCapHistoryByIdCurrentDate(ids: String, start: String, end: String?): List<CoinMarketCap> =
+        httpClient.get("market-cap/history") {
+            parameter(IDS, ids)
+            parameter(START, start)
+            parameter(END, end ?: "")
+        }
+
+    override suspend fun getGlobalVolumeHistory(start: String, end: String?): List<MarketGlobalVolumeHistory> =
+        httpClient.get("volume/history") {
+            parameter(START, start)
+            parameter(END, end ?: "")
+        }
 }
