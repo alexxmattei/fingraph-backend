@@ -29,6 +29,7 @@ class NomicsClientImpl(httpClient: HttpClient) : NomicsClient {
             url.protocol = URLProtocol.HTTPS
             url.host = API_HOST
             url.encodedPath = API_BASE_PATH + url.encodedPath
+            url.parameters["key"] = KEY
         }
         install(NomicsErrorTransformer)
         install(PagingTransformer)
@@ -51,7 +52,8 @@ class NomicsClientImpl(httpClient: HttpClient) : NomicsClient {
         interval: String,
         convert: String,
         status: String
-    ): List<Coin> = httpClient.get("currencies/ticker/$ids") {
+    ): List<Coin> = httpClient.get("currencies/ticker") {
+        parameter(IDS, ids)
         parameter(INTERVAL, interval)
         parameter(CONVERT, convert)
         parameter(STATUS, status)

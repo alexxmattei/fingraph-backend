@@ -19,7 +19,7 @@ class NomicsController {
     }
 
     private fun getCurrencyTest(route: Route) {
-        route.get("/meta") {
+        route.get("/ping") {
             val pingResponse = nomicsClient.getPing()
             call.respond(HttpStatusCode.OK, pingResponse)
         }
@@ -27,11 +27,11 @@ class NomicsController {
 
     private fun getCurrencyById(route: Route) {
         route.get("/price/{ids}") {
-            call.request.queryParameters["key"] ?: "b41f7cca5feb852dbdaa3f7eca845d9b8c2c7e42"
+            call.request.queryParameters["key"]
             val coinId = call.parameters["ids"] ?: ""
-            val interval = call.parameters["interval"] ?: ""
-            val convert = call.parameters["convert"] ?: ""
-            val status = call.parameters["status"] ?: ""
+            val interval = call.parameters["interval"] ?: "1h"
+            val convert = call.parameters["convert"] ?: "USD"
+            val status = call.parameters["status"] ?: "active"
             val currencyResponse = nomicsClient.getCurrencyById(coinId, interval, convert, status)
 
             call.respond(HttpStatusCode.OK, currencyResponse)
