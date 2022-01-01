@@ -15,7 +15,6 @@ fun main() {
         configureSerialization()
         configureMonitoring()
         configureRouting()
-//        configureHTTP()
         DBConfig()
     }.start(wait = true)
 }
